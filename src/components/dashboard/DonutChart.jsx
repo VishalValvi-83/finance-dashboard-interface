@@ -50,7 +50,7 @@ const DonutChartComponent = ({ transactions }) => {
               ))}
             </Pie>
             <Tooltip content={<CustomTooltip />} />
-            <Legend verticalAlign="bottom" height={36} iconType="circle" wrapperStyle={{ fontSize: '12px' }} />
+            <Legend verticalAlign="bottom" iconType="circle" wrapperStyle={{ fontSize: '12px', paddingTop: '20px' }} />
           </PieChart>
         </ResponsiveContainer>
       </div>

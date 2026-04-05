@@ -19,10 +19,8 @@ const Dashboard = () => {
         <p className="text-on-surface-variant text-sm mt-1">Your financial health at a glance.</p>
       </header>
 
-      {/* Top Metrics Row */}
       <SummaryCards balance={balance} income={income} expense={expense} />
 
-      {/* Middle Row: Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
           <BarChartComponent transactions={transactions} />
@@ -32,7 +30,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Bottom Row: Recent Transactions */}
       <div className="w-full">
         <RecentTransactions transactions={transactions} onViewAll={() => setActiveSection('transactions')} />
       </div>

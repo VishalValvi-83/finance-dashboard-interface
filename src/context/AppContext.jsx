@@ -6,8 +6,15 @@ export const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [transactions, setTransactions] = useState(() => {
     const saved = localStorage.getItem('finance_transactions');
-    if (saved) return JSON.parse(saved);
-    return mockTransactions;
+    const storedMockHash = localStorage.getItem('mock_data_hash');
+    const currentMockHash = JSON.stringify(mockTransactions);
+
+    if (!saved || storedMockHash !== currentMockHash) {
+      localStorage.setItem('mock_data_hash', currentMockHash);
+      return mockTransactions;
+    }
+    
+    return JSON.parse(saved);
   });
 
   const [activeSection, setActiveSection] = useState('dashboard');
