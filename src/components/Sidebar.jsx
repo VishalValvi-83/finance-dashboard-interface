@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
-import { LayoutDashboard, ArrowLeftRight, PieChart, Info as InfoIcon, Sun, Moon, X } from 'lucide-react';
+import { LayoutDashboard, ArrowLeftRight, PieChart, Info as InfoIcon, Sun, Moon, X, ChevronDown, Check } from 'lucide-react';
+import { Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from '@headlessui/react';
 import { userProfile } from '../data/mockData';
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -10,7 +11,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'transactions', label: 'Transactions', icon: ArrowLeftRight },
     { id: 'insights', label: 'Insights', icon: PieChart },
-    { id: 'info', label: 'Info & README', icon: InfoIcon },
+    { id: 'info', label: 'About ', icon: InfoIcon },
   ];
 
   const handleNavClick = (id) => {
@@ -20,15 +21,13 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   return (
     <>
-      {/* Mobile Overlay */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm transition-opacity"
           onClick={() => setIsOpen(false)}
         />
       )}
 
-      {/* Sidebar Content */}
       <aside className={`
         fixed lg:static inset-y-0 left-0 z-50
         w-64 h-full bg-surface-container-lowest border-r border-outline-variant/30 
@@ -40,8 +39,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         <div>
           <div className="px-6 py-6 lg:py-8 flex items-center justify-between">
             <h1 className="text-2xl font-display font-bold gradient-text pb-1 truncate">CashCanvas</h1>
-            {/* Close Button on Mobile */}
-            <button 
+            <button
               onClick={() => setIsOpen(false)}
               className="lg:hidden p-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-lg transition-colors"
             >
@@ -57,11 +55,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-medium ${
-                    isActive 
-                      ? 'bg-primary/10 text-primary relative' 
-                      : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low'
-                  }`}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-medium ${isActive
+                    ? 'bg-primary/10 text-primary relative'
+                    : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low'
+                    }`}
                 >
                   {isActive && (
                     <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-8 bg-primary rounded-r-full" />
@@ -75,7 +72,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         </div>
 
         <div className="p-4 border-t border-outline-variant/30 flex flex-col gap-4">
-          <button 
+          <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             className="flex items-center gap-3 p-3 rounded-xl hover:bg-surface-container-low transition-colors text-on-surface-variant hover:text-on-surface"
           >
@@ -87,14 +84,37 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             <img src={userProfile.avatar} alt="Avatar" className="w-10 h-10 rounded-full border border-primary/20 shrink-0" />
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold truncate">{userProfile.name}</p>
-              <select 
-                value={selectedRole}
-                onChange={(e) => setSelectedRole(e.target.value)}
-                className="text-xs bg-transparent text-primary focus:outline-none cursor-pointer w-full mt-0.5"
-              >
-                <option value="Viewer" className="bg-surface-container-high text-on-surface">Viewer Mode</option>
-                <option value="Admin" className="bg-surface-container-high text-on-surface">Admin Mode</option>
-              </select>
+              <Listbox value={selectedRole} onChange={setSelectedRole}>
+                <div className="relative mt-0.5">
+                  <ListboxButton className="flex items-center justify-between w-full text-xs text-primary focus:outline-none cursor-pointer">
+                    <span>{selectedRole} Mode</span>
+                    <ChevronDown size={14} className="ui-open:rotate-180 transition-transform duration-200" />
+                  </ListboxButton>
+
+                  <Transition
+                    leave="transition ease-in duration-100"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <ListboxOptions className="absolute bottom-full left-0 mb-2 w-full bg-surface-container-highest border border-outline-variant/30 rounded-lg shadow-glow overflow-hidden z-50 focus:outline-none">
+                      {['Viewer', 'Admin'].map((role) => (
+                        <ListboxOption
+                          key={role}
+                          value={role}
+                          className="text-xs px-3 py-2 cursor-pointer flex items-center justify-between transition-colors data-focus:bg-surface-container-low data-selected:bg-primary/10 data-selected:text-primary text-on-surface"
+                        >
+                          {({ selected }) => (
+                            <>
+                              <span>{role} Mode</span>
+                              {selected && <Check size={12} />}
+                            </>
+                          )}
+                        </ListboxOption>
+                      ))}
+                    </ListboxOptions>
+                  </Transition>
+                </div>
+              </Listbox>
             </div>
           </div>
         </div>

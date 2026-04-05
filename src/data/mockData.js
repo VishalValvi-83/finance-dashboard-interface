@@ -22,6 +22,6 @@ export const mockTransactions = [
 ];
 
 export const userProfile = {
-  name: "Alena Smith",
-  avatar: "https://i.pravatar.cc/150?img=47"
+  name: "Vishal Valvi",
+  avatar: "https://m.media-amazon.com/images/I/41ONa5HOwfL._AC_UF1000,1000_QL80_.jpg"
 };

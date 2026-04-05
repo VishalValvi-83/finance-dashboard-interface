@@ -3,9 +3,9 @@ import { Shield, Database, LayoutTemplate, Palette } from 'lucide-react';
 
 const Info = () => {
   return (
-    <div className="flex flex-col gap-6 w-full max-w-4xl pb-8">
+    <div className="flex flex-col gap-6 w-full  pb-8">
       <header className="mb-4 shrink-0">
-        <h2 className="text-2xl lg:text-4xl font-display font-bold text-on-surface">System Info & README</h2>
+        <h2 className="text-2xl lg:text-4xl font-display font-bold text-on-surface">About System</h2>
         <p className="text-on-surface-variant text-sm mt-1 lg:mt-2">Documentation and architecture details for CashCanvas.</p>
       </header>
 
@@ -19,9 +19,7 @@ const Info = () => {
           <div>
             <h3 className="text-xl font-semibold mb-2">Project Overview</h3>
             <p className="text-on-surface-variant leading-relaxed text-sm">
-              This application is a frontend-only React dashboard built to the exact specifications of the "CashCanvas" design system. 
-              It demonstrates complex state management, data visualization via Recharts, and conditional rendering based on user roles without requiring a backend API.
-            </p>
+              This is a frontend-only React dashboard for tracking income, expenses, and financial activity. It uses Recharts for data visualization and React Context for state management, with no backend required.</p>
           </div>
         </div>
       </section>
@@ -53,7 +51,7 @@ const Info = () => {
             <h3 className="text-lg font-semibold mb-2">State & Persistence</h3>
             <p className="text-on-surface-variant text-sm leading-relaxed">
               Global state is managed via React Context API (<code className="bg-surface-container text-primary px-1.5 py-0.5 rounded text-xs mx-1">AppContext</code>).
-              The transaction ledger array is automatically serialized and saved to <code className="bg-surface-container text-primary px-1.5 py-0.5 rounded text-xs">localStorage</code> on every unmount/update. 
+              The transaction ledger array is automatically serialized and saved to <code className="bg-surface-container text-primary px-1.5 py-0.5 rounded text-xs">localStorage</code> on every unmount/update.
               This ensures persistence across browser refreshes, simulating a pseudo-database layer.
             </p>
           </div>
@@ -66,7 +64,7 @@ const Info = () => {
           <Palette className="text-primary" size={24} />
           <h3 className="text-xl font-semibold">Implemented Features</h3>
         </div>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-sm text-on-surface-variant">
           <div className="flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-primary/50"></div>
@@ -91,6 +89,22 @@ const Info = () => {
           <div className="flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-primary/50"></div>
             <span>Glassmorphism Design System matching</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary/50"></div>
+            <span>Fully Responsive Mobile Drawer</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary/50"></div>
+            <span>Dark / Light Theme Toggling</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary/50"></div>
+            <span>CSV Data Export functionality</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary/50"></div>
+            <span>Role-Based Access Control</span>
           </div>
         </div>
       </section>
