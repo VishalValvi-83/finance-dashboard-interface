@@ -14,9 +14,9 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-col gap-6 w-full h-full pb-8">
-      <header className="mb-2">
-        <h2 className="text-3xl font-display font-bold text-on-surface">Portfolio Overview</h2>
-        <p className="text-on-surface-variant text-sm mt-1">Your financial health at a glance.</p>
+      <header className="mb-2 shrink-0">
+        <h2 className="text-2xl lg:text-4xl font-display font-bold text-on-surface">Portfolio Overview</h2>
+        <p className="text-on-surface-variant text-sm mt-1 lg:mt-2">Your financial health at a glance.</p>
       </header>
 
       <SummaryCards balance={balance} income={income} expense={expense} />

@@ -17,12 +17,12 @@ const Transactions = () => {
     let result = [...transactions];
 
     if (filters.search) {
-      result = result.filter(t => 
+      result = result.filter(t =>
         t.description.toLowerCase().includes(filters.search.toLowerCase()) ||
         t.category.toLowerCase().includes(filters.search.toLowerCase())
       );
     }
-    
+
     if (filters.type !== 'All') {
       result = result.filter(t => t.type === filters.type);
     }
@@ -44,14 +44,14 @@ const Transactions = () => {
 
   const handleExportCSV = () => {
     if (filteredTransactions.length === 0) return;
-    
+
     const headers = ['ID', 'Date', 'Amount', 'Type', 'Category', 'Description', 'Status'];
     const rows = filteredTransactions.map(t => [
       t.id, t.date, t.amount, t.type, t.category, `"${t.description.replace(/"/g, '""')}"`, t.status
     ]);
-    
+
     let csvContent = headers.join(',') + '\n' + rows.map(e => e.join(',')).join('\n');
-    
+
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -68,20 +68,20 @@ const Transactions = () => {
     <div className="flex flex-col gap-6 w-full h-full pb-8">
       <header className="flex justify-between items-end mb-2">
         <div>
-          <h2 className="text-3xl font-display font-bold text-on-surface">Transactions</h2>
-          <p className="text-on-surface-variant text-sm mt-1">Manage and filter your financial records.</p>
+          <h2 className="text-2xl lg:text-4xl font-display font-bold text-on-surface">Transactions</h2>
+          <p className="text-on-surface-variant text-sm mt-1 lg:mt-2">Manage and filter your financial records.</p>
         </div>
-        
+
         {selectedRole === 'Admin' && (
           <div className="flex gap-3">
-            <button 
+            <button
               onClick={handleExportCSV}
               className="flex items-center gap-2 bg-surface-container-highest text-on-surface px-5 py-2.5 rounded-xl font-semibold hover:bg-surface-container-high transition-colors border border-outline-variant/30"
             >
               <Download size={18} />
               Export CSV
             </button>
-            <button 
+            <button
               onClick={() => setModalState({ type: 'add', data: null })}
               className="bg-linear-to-r from-primary to-primary-container text-on-primary-fixed px-5 py-2.5 rounded-xl font-semibold hover:opacity-90 transition-opacity"
             >
@@ -93,8 +93,8 @@ const Transactions = () => {
 
       <FilterBar categories={categories} />
 
-      <TransactionTable 
-        data={filteredTransactions} 
+      <TransactionTable
+        data={filteredTransactions}
         onEdit={(tx) => setModalState({ type: 'edit', data: tx })}
         onDelete={(tx) => setModalState({ type: 'delete', data: tx })}
         isAdmin={selectedRole === 'Admin'}

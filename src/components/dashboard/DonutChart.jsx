@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
+import { AppContext } from '../../context/AppContext';
 
 const DonutChartComponent = ({ transactions }) => {
   const chartData = useMemo(() => {
@@ -13,10 +14,14 @@ const DonutChartComponent = ({ transactions }) => {
     return Object.keys(categories).map(key => ({
       name: key,
       value: categories[key]
-    })).sort((a,b) => b.value - a.value).slice(0, 4); // Top 4
+    })).sort((a, b) => b.value - a.value).slice(0, 4); // Top 4
   }, [transactions]);
 
-  const COLORS = ['#8083ff', '#4edea3', '#ffb2b7', '#dae2fd'];
+  const { theme } = useContext(AppContext);
+
+  const COLORS = theme === 'dark'
+    ? ['#8083ff', '#4edea3', '#ffb2b7', '#dae2fd']
+    : ['#818cf8', '#34d399', '#fb7185', '#93c5fd'];
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {

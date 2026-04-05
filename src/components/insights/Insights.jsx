@@ -10,9 +10,9 @@ const Insights = () => {
 
   return (
     <div className="flex flex-col gap-6 w-full h-full pb-8">
-      <header className="mb-2">
-        <h2 className="text-3xl font-display font-bold text-on-surface">Insights & Analytics</h2>
-        <p className="text-on-surface-variant text-sm mt-1">Deep dive into your financial habits and trends.</p>
+      <header className="mb-2 shrink-0">
+        <h2 className="text-2xl lg:text-4xl font-display font-bold text-on-surface">Insights & Analytics</h2>
+        <p className="text-on-surface-variant text-sm mt-1 lg:mt-2">Deep dive into your financial habits and trends.</p>
       </header>
 
       {/* Top 4 Stats */}

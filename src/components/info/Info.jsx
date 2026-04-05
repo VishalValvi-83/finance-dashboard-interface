@@ -4,9 +4,9 @@ import { Shield, Database, LayoutTemplate, Palette } from 'lucide-react';
 const Info = () => {
   return (
     <div className="flex flex-col gap-6 w-full max-w-4xl pb-8">
-      <header className="mb-4">
-        <h2 className="text-3xl font-display font-bold text-on-surface">System Info & README</h2>
-        <p className="text-on-surface-variant text-sm mt-1">Documentation and architecture details for Lumina Finance.</p>
+      <header className="mb-4 shrink-0">
+        <h2 className="text-2xl lg:text-4xl font-display font-bold text-on-surface">System Info & README</h2>
+        <p className="text-on-surface-variant text-sm mt-1 lg:mt-2">Documentation and architecture details for Lumina Finance.</p>
       </header>
 
       {/* Overview Section */}

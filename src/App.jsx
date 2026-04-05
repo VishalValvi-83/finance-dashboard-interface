@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from './context/AppContext';
+import { Menu } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/dashboard/Dashboard';
 import Transactions from './components/transactions/Transactions';
@@ -8,6 +9,7 @@ import Info from './components/info/Info';
 
 function App() {
   const { activeSection, theme } = useContext(AppContext);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (theme === 'dark') {
@@ -29,12 +31,28 @@ function App() {
 
   return (
     <div className="flex h-screen w-full bg-background overflow-hidden text-on-surface font-body">
-      <Sidebar />
-      <main className="flex-1 h-full overflow-y-auto p-4 md:p-8">
-        <div className="max-w-7xl mx-auto h-full">
-          {renderContent()}
-        </div>
-      </main>
+      <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      
+      <div className="flex-1 flex flex-col h-full overflow-hidden w-full relative">
+        {/* Mobile Header */}
+        <header className="lg:hidden flex items-center justify-between p-4 bg-surface-container-lowest border-b border-outline-variant/30 shrink-0">
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => setIsSidebarOpen(true)}
+              className="p-2 -ml-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-lg transition-colors"
+            >
+              <Menu size={24} />
+            </button>
+            <h1 className="text-xl font-display font-bold gradient-text pb-0.5 truncate">Lumina Finance</h1>
+          </div>
+        </header>
+
+        <main className="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 md:p-6 lg:p-8">
+          <div className="max-w-7xl mx-auto h-full w-full">
+            {renderContent()}
+          </div>
+        </main>
+      </div>
     </div>
   );
 }

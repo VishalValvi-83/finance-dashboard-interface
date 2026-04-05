@@ -1,17 +1,20 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AppContext } from '../../context/AppContext';
 
 const TrendChart = ({ transactions }) => {
+  const { theme } = useContext(AppContext);
+
   const chartData = useMemo(() => {
     const dataObj = {};
     let runningBalance = 20000;
 
-    const sorted = [...transactions].sort((a,b) => new Date(a.date) - new Date(b.date));
+    const sorted = [...transactions].sort((a, b) => new Date(a.date) - new Date(b.date));
 
     sorted.forEach(tx => {
       const date = new Date(tx.date);
       const month = date.toLocaleString('default', { month: 'short', year: '2-digit' });
-      
+
       if (tx.type === 'Income') runningBalance += tx.amount;
       else runningBalance -= tx.amount;
 
@@ -29,7 +32,7 @@ const TrendChart = ({ transactions }) => {
       return (
         <div className="glass-panel p-4 rounded-xl shadow-glow border-none">
           <p className="text-on-surface font-semibold mb-2">{label}</p>
-          <p className="text-sm font-medium text-primary">
+          <p className="text-sm font-medium dark:text-primary text-blue-100">
             Balance: ₹{payload[0].value.toLocaleString()}
           </p>
         </div>
@@ -46,13 +49,13 @@ const TrendChart = ({ transactions }) => {
           <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
             <defs>
               <linearGradient id="colorBalance" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#c0c1ff" stopOpacity={0.3}/>
-                <stop offset="95%" stopColor="#c0c1ff" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#c0c1ff" stopOpacity={0.3} />
+                <stop offset="95%" stopColor="#c0c1ff" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#2d3449" vertical={false} />
-            <XAxis dataKey="name" stroke="#c7c4d7" tick={{ fill: '#c7c4d7', fontSize: 12 }} axisLine={false} tickLine={false} />
-            <YAxis stroke="#c7c4d7" tick={{ fill: '#c7c4d7', fontSize: 12 }} axisLine={false} tickLine={false} tickFormatter={(v) => `₹${v/1000}k`} />
+            <XAxis dataKey="name" stroke="#c7c4d7" tick={{ fill: theme === 'dark' ? '#c7c4d7' : '#333', fontSize: 12 }} axisLine={false} tickLine={false} />
+            <YAxis stroke="#c7c4d7" tick={{ fill: theme === 'dark' ? '#c7c4d7' : '#333', fontSize: 12 }} axisLine={false} tickLine={false} tickFormatter={(v) => `₹${v / 1000}k`} />
             <Tooltip content={<CustomTooltip />} />
             <Area type="monotone" dataKey="Balance" stroke="#c0c1ff" strokeWidth={3} fillOpacity={1} fill="url(#colorBalance)" />
           </AreaChart>

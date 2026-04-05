@@ -1,7 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AppContext } from './../../context/AppContext';
 
 const CategoryChart = ({ transactions }) => {
+  const { theme } = useContext(AppContext);
+
   const chartData = useMemo(() => {
     const expenses = transactions.filter(t => t.type === 'Expense');
     const categories = {};
@@ -15,8 +18,8 @@ const CategoryChart = ({ transactions }) => {
         name: key,
         value: categories[key]
       }))
-      .sort((a,b) => b.value - a.value)
-      .slice(0, 5); // Top 5
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 5);
   }, [transactions]);
 
   const CustomTooltip = ({ active, payload, label }) => {
@@ -39,9 +42,12 @@ const CategoryChart = ({ transactions }) => {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData} layout="vertical" margin={{ top: 0, right: 30, left: 30, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#2d3449" horizontal={false} />
-            <XAxis type="number" stroke="#c7c4d7" tick={{ fill: '#c7c4d7', fontSize: 12 }} axisLine={false} tickLine={false} />
-            <YAxis type="category" dataKey="name" stroke="#c7c4d7" tick={{ fill: '#dae2fd', fontSize: 12, fontWeight: 500 }} axisLine={false} tickLine={false} />
-            <Tooltip cursor={{ fill: '#222a3d' }} content={<CustomTooltip />} />
+            <XAxis type="number" stroke="#c7c4d7" tick={{ fill: theme === 'dark' ? '#c7c4d7' : '#333', fontSize: 12 }} axisLine={false} tickLine={false} />
+            <YAxis type="category" dataKey="name" stroke="#c7c4d7" tick={{ fill: theme === 'dark' ? '#dae2fd' : '#818cf8', fontSize: 12, fontWeight: 500 }} axisLine={false} tickLine={false} />
+            <Tooltip
+              cursor={{ fill: theme === 'dark' ? '#222a3d' : '#e2e8f0' }}
+              content={<CustomTooltip />}
+            />
             <Bar dataKey="value" fill="#ffb2b7" radius={[0, 4, 4, 0]} maxBarSize={24} />
           </BarChart>
         </ResponsiveContainer>

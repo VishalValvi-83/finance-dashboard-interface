@@ -1,7 +1,11 @@
 import React, { useMemo } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { AppContext } from '../../context/AppContext';
+import { useContext } from 'react';
 
 const BarChartComponent = ({ transactions }) => {
+  const { theme } = useContext(AppContext);
+
   const chartData = useMemo(() => {
     const dataObj = {};
 
@@ -39,6 +43,8 @@ const BarChartComponent = ({ transactions }) => {
     }
     return null;
   };
+  const incomeColor = theme === 'dark' ? '#c0c1ff' : '#818cf8';
+  const expenseColor = theme === 'dark' ? '#ffb2b7' : '#fb7185';
 
   return (
     <div className="bg-surface-container-low rounded-2xl p-6 ghost-border h-full">
@@ -49,10 +55,10 @@ const BarChartComponent = ({ transactions }) => {
             <CartesianGrid strokeDasharray="3 3" stroke="#2d3449" vertical={false} />
             <XAxis dataKey="name" stroke="#c7c4d7" tick={{ fill: '#c7c4d7', fontSize: 12 }} axisLine={false} tickLine={false} />
             <YAxis stroke="#c7c4d7" tick={{ fill: '#c7c4d7', fontSize: 12 }} axisLine={false} tickLine={false} tickFormatter={(v) => `₹${v / 1000}k`} />
-            <Tooltip cursor={{ fill: '#222a3d' }} content={<CustomTooltip />} />
+            <Tooltip cursor={{ fill: theme === 'dark' ? '#222a3d' : '#e2e8f0' }} content={<CustomTooltip />} />
             <Legend iconType="circle" wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
-            <Bar dataKey="Income" fill="#c0c1ff" radius={[4, 4, 0, 0]} maxBarSize={40} />
-            <Bar dataKey="Expense" fill="#ffb2b7" radius={[4, 4, 0, 0]} maxBarSize={40} />
+            <Bar dataKey="Income" fill={incomeColor} radius={[4, 4, 0, 0]} maxBarSize={40} />
+            <Bar dataKey="Expense" fill={expenseColor} radius={[4, 4, 0, 0]} maxBarSize={40} />
           </BarChart>
         </ResponsiveContainer>
       </div>
