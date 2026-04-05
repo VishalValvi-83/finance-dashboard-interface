@@ -6,7 +6,7 @@ const Info = () => {
     <div className="flex flex-col gap-6 w-full max-w-4xl pb-8">
       <header className="mb-4 shrink-0">
         <h2 className="text-2xl lg:text-4xl font-display font-bold text-on-surface">System Info & README</h2>
-        <p className="text-on-surface-variant text-sm mt-1 lg:mt-2">Documentation and architecture details for Lumina Finance.</p>
+        <p className="text-on-surface-variant text-sm mt-1 lg:mt-2">Documentation and architecture details for CashCanvas.</p>
       </header>
 
       {/* Overview Section */}
@@ -19,7 +19,7 @@ const Info = () => {
           <div>
             <h3 className="text-xl font-semibold mb-2">Project Overview</h3>
             <p className="text-on-surface-variant leading-relaxed text-sm">
-              This application is a frontend-only React dashboard built to the exact specifications of the "Lumina Finance" design system. 
+              This application is a frontend-only React dashboard built to the exact specifications of the "CashCanvas" design system. 
               It demonstrates complex state management, data visualization via Recharts, and conditional rendering based on user roles without requiring a backend API.
             </p>
           </div>

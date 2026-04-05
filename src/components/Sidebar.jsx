@@ -39,7 +39,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       `}>
         <div>
           <div className="px-6 py-6 lg:py-8 flex items-center justify-between">
-            <h1 className="text-2xl font-display font-bold gradient-text pb-1 truncate">Lumina Finance</h1>
+            <h1 className="text-2xl font-display font-bold gradient-text pb-1 truncate">CashCanvas</h1>
             {/* Close Button on Mobile */}
             <button 
               onClick={() => setIsOpen(false)}

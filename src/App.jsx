@@ -43,7 +43,7 @@ function App() {
             >
               <Menu size={24} />
             </button>
-            <h1 className="text-xl font-display font-bold gradient-text pb-0.5 truncate">Lumina Finance</h1>
+            <h1 className="text-xl font-display font-bold gradient-text pb-0.5 truncate">CashCanvas</h1>
           </div>
         </header>
 
