@@ -7,31 +7,41 @@ component design, and state management in React.
 
 ## Overview
 
-This project is a React-based single-page application (SPA). Instead of hooking it up to a live backend, I used React Context and `localStorage` to simulate a database. This means all your additions, edits, and deletions are saved locally in your browser and persist across page reloads.
+This project is a React-based single-page application (SPA). I used React Context and `localStorage` to simulate a database. This means all your additions, edits, and deletions are saved locally in your browser and persist across page reloads.
 
 ## Features
 
-- **Role-Based Views**: You can toggle between an _Admin_ and a _Viewer_ using the sidebar dropdown. Admins can add, edit, or delete transactions, while Viewers have read-only access.
-- **Data Visualization**: Uses Recharts to render out income vs. expense bar charts, top category donut charts, and a running balance area chart. The charts automatically recalculate based on the mock transaction ledger.
-- **Transaction Management**: A full table view with pagination, searchable columns, and category filtering.
-- **Responsive Layout**: Works across desktop, tablet, and mobile views. The sidebar collapses into a hamburger menu on smaller screens.
-- **Light / Dark Mode**: Fully supported theme toggling using Tailwind's dark mode classes.
+- **Role-Based Views**: You can toggle between an _Admin_ and a _Viewer_ using
+  the sidebar dropdown. Admins can add, edit, or delete transactions, while
+  Viewers have read-only access.
+- **Data Visualization**: Uses Recharts to render out income vs. expense bar
+  charts, top category donut charts, and a running balance area chart. The
+  charts automatically recalculate based on the mock transaction ledger.
+- **Transaction Management**: A full table view with pagination, searchable
+  columns, and category filtering.
+- **Insights & Analytics**: Highlights top spending category, best income month,
+  savings ratio, and financial health observations derived from the transaction data.
+- **CSV Export**: Admins can export the current transaction list as a `.csv` file.
+- **Responsive Layout**: Works across desktop, tablet, and mobile views. The
+  sidebar collapses into a hamburger menu on smaller screens.
+- **Light / Dark Mode**: Fully supported theme toggling using Tailwind's dark
+  mode classes.
 
 ## Tech Stack
 
-- **Framework**: React 18 (bootstrapped with Vite)
+- **Framework**: React 18 (Vite)
 - **Styling**: Tailwind CSS v4
 - **Charts**: Recharts
 - **Icons**: Lucide React
 - **State**: React Context API
 
-## Getting Started
+## Set Up
 
 Follow these steps to run the project locally.
 
 ### Prerequisites
 
-Make sure you have Node.js installed on your machine.
+Node.js.
 
 ### Installation
 
@@ -54,7 +64,7 @@ npm install
 npm run dev
 ```
 
-4. Open your browser and navigate to the local URL provided in the terminal (usually `http://localhost:5173`).
+4. Navigate to the local URL provided in the terminal (usually `http://localhost:5173`).
 
 ## Project Structure
 
